@@ -1,6 +1,6 @@
 ###
 #
-#= LATTICE FUNCTIONS =#
+##= LATTICE FUNCTIONS =##
 #
 ###
 

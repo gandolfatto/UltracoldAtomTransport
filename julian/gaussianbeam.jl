@@ -1,6 +1,6 @@
 ###
 #
-#= GAUSSIAN BEAM PROPERTIES =#
+##= GAUSSIAN BEAM PROPERTIES =##
 #
 ###
 
