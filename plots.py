@@ -208,7 +208,7 @@ def energies(results: Dict[str, Any], params: Dict[str, Any]):
                                 (vs[i, j, 2] - v_latt(ts[j], params["d max"], params["t max"]))**2
                                 )
             
-            Ug[i, j] = m*g0[2]*rs[i, j, 1]
+            Ug[i, j] = m*g0*rs[i, j, 1]
 
             Ul[i, j] = U_lattice(rs[i, j, 0], rs[i, j, 1], rs[i, j, 2], ts[j],
                                  params["lens elements"], 
