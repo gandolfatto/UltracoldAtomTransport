@@ -23,7 +23,8 @@ mm = 1e-3
 um = 1e-6
 nm = 1e-9
 
+# Temperature
+uK = 1e-6
 
-
-m = 171*amu         # mass of Yb-171
-g0 = -9.81          # gravitational acceleration
+# Gravity
+g0 = -9.81         

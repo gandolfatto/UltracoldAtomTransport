@@ -7,59 +7,86 @@
 
 ###
 include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/simfuncs.jl")
+include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/atomicspecies.jl")
+include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/lenspresets.jl")
 ###
 
-
-### Loading position/velocity
-x0, y0, z0 = 0.0, 0.0, 11.6*cm
-pos_load = [x0; y0; z0]
-
-vx0, vy0, vz0 = 0.0, 0.0, 0.0
-vel_load = [vx0; vy0; vz0]
-
-
-### Lens elements
-lens_elements = [1.69*cm 18.0*cm; 
-                 51.6*cm 18.0*cm]
-
-
-### Beam properties
-wavelength = 1064.0*nm              
-
-r0_1 = 0.0
-prop_dir1 = 1.0 
-wavelength1 = wavelength
-w0_1 = 362.0*nm
-P1 = 100.0
-beam1 = GaussianBeam(r0_1, prop_dir1, wavelength1, w0_1, P1)
-
-r0_2 = 53.2*cm
-prop_dir2 = -1.0 
-wavelength2 = wavelength
-w0_2 = 362.0*nm
-P2 = 100.0
-beam2 = GaussianBeam(r0_2, prop_dir2, wavelength2, w0_2, P2)
-
+# wavelength
+wavelength = 1064.0*nm
 
 ### Ramp parameters
 t_max = 50.0*ms
 d_max = 30.0*cm
 
+### Atomic transitions
+transitions = transitions_Yb171
 
-### GS --> Excited state transitions for Yb-171
-transitions = [399*nm 2*pi*29.1*MHz;                # (6s^2) 1S0 --> (6s6p) 1P1
-               556*nm 2*pi*181.1*KHz]               # (6s^2) 1S0 --> (6s6p) 3P1
+
+VF_mode = false
+
+if VF_mode == false
+
+    ### Loading position/velocity
+    pos_load = pos_load_STATIC1
+    vel_load = [0.0; 0.0; 0.0]
+
+    ### Lens elements
+    lens_elements = lens_elements_STATIC1
+
+    ### Beam properties
+    r0_1 = r0_1_STATIC1
+    prop_dir1 = 1.0 
+    wavelength1 = wavelength
+    w0_1 = w0_1_STATIC1
+    P1 = 100.0
+    beam1 = GaussianBeam(r0_1, prop_dir1, wavelength1, w0_1, P1)
+
+    r0_2 = r0_2_STATIC1
+    prop_dir2 = -1.0 
+    wavelength2 = wavelength
+    w0_2 = w0_1_STATIC1
+    P2 = 100.0
+    beam2 = GaussianBeam(r0_2, prop_dir2, wavelength2, w0_2, P2)
+
+
+elseif VF_mode == true
+
+    ### Loading position/velocity
+    pos_load = pos_load_VF
+    vel_load = [0.0; 0.0; 0.0]
+
+    ### Lens elements
+    lens_elements = lens_elements_STATIC1
+
+    ### Beam properties
+    r0_1 = r0_1_VF 
+    prop_dir1 = 1.0 
+    wavelength1 = wavelength
+    w0_1 = w0_1_VF
+    P1 = 25.0
+    beam1 = GaussianBeam(r0_1, prop_dir1, wavelength1, w0_1, P1)
+
+    r0_2 = r0_2_VF
+    prop_dir2 = -1.0 
+    wavelength2 = wavelength
+    w0_2 = w0_2_VF
+    P2 = 25.0
+    beam2 = GaussianBeam(r0_2, prop_dir2, wavelength2, w0_2, P2)
+end 
+
+
 
 
 ### Simulation parameters
-dt = 1e-7
-t_sim = 50.0*ms
+dt = 1e-5
+t_sim = 1.0*ms
 N_atoms = 8
 sigma_x = [0.02*mm 0.02*mm 0.02*mm]
-T = 1e-6
+T = 10.0*uK
 Boltz_fac = sqrt(kb*T/m)
 sigma_v = Boltz_fac .* [1.0 1.0 1.0]
-sim_params = SimParams(dt, t_sim, N_atoms, sigma_x, sigma_v)
+par_heating_ON = true
+sim_params = SimParams(dt, t_sim, N_atoms, sigma_x, sigma_v, par_heating_ON)
 
 
 
