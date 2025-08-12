@@ -20,9 +20,9 @@ Both montepython and kingjulian follow a similar workflow:
 ## Pending Updates
 ### Major
   - Focus-tunable lenses (i.e, implementing lenses with time-dependent focal length).
-  - New beam profiles (Bessel beams, high-order TEM Gaussian beams, etc.).
-  - New ramping profiles.
-  - Simulated Zener-tunneling due to suppressed trap depth in accelerated lattices.
+  - New beam profiles (Higher-order TEM Gaussian beams, Bessel beams, etc.).
+  - New ramp profiles.
+  - Simulated Landau-Zener tunneling due to suppressed trap depth in accelerated lattices.
 ### Minor
   - Simulated parametric heating due to intensity noise fluctuations along transverse axis.
   - Simulated loss due to spontaneuous emission (less important in far-off resonant traps)
