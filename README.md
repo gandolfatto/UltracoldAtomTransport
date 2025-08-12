@@ -9,7 +9,7 @@ There are two versions of the main source code: (1) montepython (written in Pyth
 
 ## Usage
 Both montepython and kingjulian follow a similar workflow:
-  - Create an atomic species: mass of atom &amp; and ground state --> excited state transitions
+  - Create an atomic species: mass of atom &amp; ground state --> excited state transitions
     (the transitions are encoded in an array, which contains the transition wavelength and transition linewidth).
   - Initialize the loading position &amp; velocity for the atoms.
   - Create the optical system
