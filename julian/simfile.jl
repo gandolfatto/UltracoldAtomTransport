@@ -14,14 +14,6 @@ include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/lenspre
 # wavelength
 wavelength = 1064.0*nm
 
-### Ramp parameters
-t_max = 50.0*ms
-d_max = 30.0*cm
-
-### Atomic transitions
-transitions = transitions_Yb171
-
-
 VF_mode = false
 
 if VF_mode == false
@@ -73,7 +65,20 @@ elseif VF_mode == true
     P2 = 25.0
     beam2 = GaussianBeam(r0_2, prop_dir2, wavelength2, w0_2, P2)
 end 
+###
 
+
+### Atomic transitions
+transitions = transitions_Yb171
+###
+
+
+### Ramp parameters
+ramp_type = "Minimum Jerk"
+d_max = 30.0*cm
+t_max = 50.0*ms
+Ramp = RampProfile(ramp_type, d_max, t_max)
+###
 
 
 
@@ -87,19 +92,22 @@ Boltz_fac = sqrt(kb*T/m)
 sigma_v = Boltz_fac .* [1.0 1.0 1.0]
 par_heating_ON = true
 sim_params = SimParams(dt, t_sim, N_atoms, sigma_x, sigma_v, par_heating_ON)
+###
 
 
 
 
-###################### 
-#   RUN SIMULATION   # 
-###################### 
+
+
+############################################
+#               RUN SIMULATION             # 
+############################################
 start = time()
 
 times, rs, vs = run_MC_sim(pos_load, vel_load, 
                            lens_elements, 
                            beam1, beam2, 
-                           d_max, t_max,
+                           Ramp, 
                            transitions,
                            sim_params)
 

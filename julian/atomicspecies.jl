@@ -3,6 +3,13 @@
 ##= ATOMIC SPECIES =##
 #
 ###
+
+
+### 
+include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/consts.jl")
+###
+
+
 amu = 1.67e-27
 
 

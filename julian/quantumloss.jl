@@ -14,13 +14,13 @@ include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/lattice
 function axial_freq(x::Float64, y::Float64, z::Float64, t::Float64, 
                     lens_eles::Array{Float64}, 
                     beam1::GaussianBeam, beam2::GaussianBeam,
-                    d_max::Float64, t_max::Float64, 
+                    rp::RampProfile, 
                     transitions::Array{Float64})
     
     U = U_lattice(x, y, z, t,
                   lens_eles, 
                   beam1, beam2,
-                  d_max, t_max, 
+                  rp, 
                   transitions)
     
     omega_z = (1/beam1.wavelength) * sqrt(abs(2*U/m))

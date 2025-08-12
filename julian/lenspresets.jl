@@ -29,6 +29,10 @@ lens_elements_STATIC1 = [1.60*cm 18.0*cm;
 
 
 
+
+
+
+                         
 ### Varifocal (VF) Lens Configurations
 #
 #=

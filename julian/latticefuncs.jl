@@ -35,10 +35,10 @@ end
 function I_lattice(x::Float64, y::Float64, z::Float64, t::Float64, 
                    lens_eles::Array{Float64}, 
                    beam1::GaussianBeam, beam2::GaussianBeam,
-                   d_max::Float64, t_max::Float64)
+                   rp::RampProfile)
     
     k = 2*pi / beam1.wavelength
-    z_lattice = z_latt(t, d_max, t_max)                                             
+    z_lattice = z_latt(t, rp)                                             
 
     I1 = I_field(x, y, z, lens_eles, beam1)
     I2 = I_field(x, y, z, lens_eles, beam2)
@@ -52,13 +52,13 @@ end
 function U_lattice(x::Float64, y::Float64, z::Float64, t::Float64, 
                    lens_eles::Array{Float64}, 
                    beam1::GaussianBeam, beam2::GaussianBeam,
-                   d_max::Float64, t_max::Float64, 
+                   rp::RampProfile, 
                    transitions::Array{Float64})
     
     I = I_lattice(x, y, z, t, 
                   lens_eles, 
                   beam1, beam2,
-                  d_max, t_max)
+                  rp)
     
     alpha = atomic_pol(beam1.wavelength, transitions)
 
@@ -71,12 +71,12 @@ end
 function F_lattice(x::Float64, y::Float64, z::Float64, t::Float64, 
                    lens_eles::Array{Float64}, 
                    beam1::GaussianBeam, beam2::GaussianBeam,
-                   d_max::Float64, t_max::Float64, 
+                   rp::RampProfile,
                    transitions::Array{Float64})
     
     k = 2*pi / beam1.wavelength
     r2_perp = x^2 + y^2
-    z_lattice = z_latt(t, d_max, t_max)
+    z_lattice = z_latt(t, rp)
 
     # beam 1
     w1 = beam_width(z, lens_eles, beam1)

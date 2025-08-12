@@ -29,7 +29,7 @@ end
 function MC_step(pos::Array{Float64}, vel::Array{Float64}, t::Float64, 
                  lens_eles::Array{Float64}, 
                  beam1::GaussianBeam, beam2::GaussianBeam,
-                 d_max::Float64, t_max::Float64, 
+                 rp::RampProfile, 
                  transitions::Array{Float64},
                  sim_params::SimParams)
     
@@ -43,7 +43,7 @@ function MC_step(pos::Array{Float64}, vel::Array{Float64}, t::Float64,
     Fx, Fy, Fz = F_lattice(x1, y1, z1, t1, 
                            lens_eles, 
                            beam1, beam2,
-                           d_max, t_max, 
+                           rp, 
                            transitions)
 
     dvx1 = (Fx/m)*sim_params.dt
@@ -57,7 +57,7 @@ function MC_step(pos::Array{Float64}, vel::Array{Float64}, t::Float64,
     Fx, Fy, Fz = F_lattice(x1 + dx1, y1 + dy1, z1 + dz1, t1 + sim_params.dt, 
                            lens_eles, 
                            beam1, beam2,
-                           d_max, t_max, 
+                           rp, 
                            transitions)
     
     dvx2 = (Fx/m)*sim_params.dt
@@ -78,7 +78,7 @@ function MC_step(pos::Array{Float64}, vel::Array{Float64}, t::Float64,
         ax_freq = axial_freq(x, y, z, t,
                              lens_eles, 
                              beam1, beam2,
-                             d_max, t_max, 
+                             rp, 
                              transitions)
         Gamma_z = par_heating_rate(ax_freq, beam1, beam2)
 
@@ -98,7 +98,7 @@ end
 function one_atom_sim(r0::Array{Float64}, v0::Array{Float64}, 
                       lens_eles::Array{Float64}, 
                       beam1::GaussianBeam, beam2::GaussianBeam, 
-                      d_max::Float64, t_max::Float64, 
+                      rp::RampProfile,  
                       transitions::Array{Float64},
                       sim_params::SimParams)
         
@@ -118,7 +118,7 @@ function one_atom_sim(r0::Array{Float64}, v0::Array{Float64},
         r, v = MC_step(r, v, t, 
                        lens_eles, 
                        beam1, beam2,
-                       d_max, t_max, 
+                       rp, 
                        transitions, 
                        sim_params)
         
@@ -133,7 +133,7 @@ end
 function run_MC_sim(pos_load::Array{Float64}, vel_load::Array{Float64}, 
                     lens_eles::Array{Float64}, 
                     beam1::GaussianBeam, beam2::GaussianBeam, 
-                    d_max::Float64, t_max::Float64, 
+                    rp::RampProfile, 
                     transitions::Array{Float64},
                     sim_params::SimParams)
     
@@ -152,7 +152,7 @@ function run_MC_sim(pos_load::Array{Float64}, vel_load::Array{Float64},
         rs[i, :, :], vs[i, :, :] = one_atom_sim(r0_arr[i, :], v0_arr[i, :], 
                                                 lens_eles, 
                                                 beam1, beam2,
-                                                d_max, t_max, 
+                                                rp, 
                                                 transitions, 
                                                 sim_params)
     end
