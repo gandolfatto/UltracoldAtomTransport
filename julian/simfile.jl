@@ -1,6 +1,6 @@
 ###
 #
-##= SIMULATION FILE =##
+##=  SIMULATION FILE  =##
 #
 ###
 

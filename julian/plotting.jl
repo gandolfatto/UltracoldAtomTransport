@@ -1,6 +1,6 @@
 ###
 #
-##= PLOTTING =##
+##=  PLOTTING  =##
 #
 ###
 

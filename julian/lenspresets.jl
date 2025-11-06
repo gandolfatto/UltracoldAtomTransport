@@ -1,6 +1,6 @@
 ###
 #
-##= LENS CONFIGURATION PRESETS =##
+##=  LENS CONFIGURATION PRESETS  =##
 #
 ###
 

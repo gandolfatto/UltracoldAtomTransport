@@ -1,6 +1,6 @@
 ###
 #
-##= SIMULATED LOSS DUE QM EFFECTS =##
+##=  SIMULATED LOSS DUE QM EFFECTS  =##
 #
 ###
 

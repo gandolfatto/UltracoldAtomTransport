@@ -1,6 +1,6 @@
 ###
 #
-##= ATOMIC SPECIES =##
+##=  ATOMIC SPECIES  =##
 #
 ###
 
