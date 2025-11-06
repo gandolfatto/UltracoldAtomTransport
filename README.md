@@ -18,7 +18,7 @@ Both montepython and kingjulian follow a similar workflow:
   - Define a ramp profile object for the optical lattice
     (current ramp profiles: "None", "Linear", "Minimum Jerk").
   - Define simulation parameters (time step, simulation time, number of atoms, initial cloud position distribution, temperature).
-  - Perform the simulation with run_MC_sim() --> returns the positions &amp; velocities of each atom at each time step of the simulation.
+  - Run the simulation file (MCsim.py for montepython, simfile.jl for kingjulian) --> returns the positions &amp; velocities of each atom at each time step of the simulation.
 
 ## Pending Updates
   - Focus-tunable lenses (implementing thin lenses with time-dependent focal length).
