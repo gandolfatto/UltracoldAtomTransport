@@ -4,17 +4,25 @@
 #
 ###
 
+
+
 ###
 using Base.Threads
-# using NPZ
-
-include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/latticefuncs.jl")
-include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/atomicspecies.jl")
-include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/quantumloss.jl")
 ###
 
 
-### Create a simulation parameter structure
+
+###
+include("latticefuncs.jl")
+include("atomicspecies.jl")
+include("quantumloss.jl")
+###
+
+
+
+###   Create a simulation parameter structure   ###
+#
+###
 struct SimParams
     dt::Float64                 # time step
     t_sim::Float64              # simulation time
@@ -23,9 +31,11 @@ struct SimParams
     sigma_v::Array{Float64}     # initial velocity distribution width
     par_heating::Bool           # simulate parametric heating?
 end
+###
 
 
 
+###
 function MC_step(pos::Array{Float64}, vel::Array{Float64}, t::Float64, 
                  lens_eles::Array{Float64}, 
                  beam1::GaussianBeam, beam2::GaussianBeam,
@@ -92,9 +102,11 @@ function MC_step(pos::Array{Float64}, vel::Array{Float64}, t::Float64,
 
     return r1, v1
 end 
+###
 
 
 
+###
 function one_atom_sim(r0::Array{Float64}, v0::Array{Float64}, 
                       lens_eles::Array{Float64}, 
                       beam1::GaussianBeam, beam2::GaussianBeam, 
@@ -122,14 +134,16 @@ function one_atom_sim(r0::Array{Float64}, v0::Array{Float64},
                        transitions, 
                        sim_params)
         
-        rs[i, :] = r
-        vs[i, :] = v
+        rs[i+1, :] = r
+        vs[i+1, :] = v
     end
     return rs, vs
 end 
+###
 
 
 
+###
 function run_MC_sim(pos_load::Array{Float64}, vel_load::Array{Float64}, 
                     lens_eles::Array{Float64}, 
                     beam1::GaussianBeam, beam2::GaussianBeam, 
@@ -149,12 +163,14 @@ function run_MC_sim(pos_load::Array{Float64}, vel_load::Array{Float64},
 
     @threads for i in 1:sim_params.N_atoms
 
-        rs[i, :, :], vs[i, :, :] = one_atom_sim(r0_arr[i, :], v0_arr[i, :], 
-                                                lens_eles, 
-                                                beam1, beam2,
-                                                rp, 
-                                                transitions, 
-                                                sim_params)
+        r_i, v_i = one_atom_sim(r0_arr[i, :], v0_arr[i, :], 
+                                lens_eles, 
+                                beam1, beam2,
+                                rp, 
+                                transitions, 
+                                sim_params)
+        rs[i, :, :], vs[i, :, :] = r_i, v_i
+
     end
     return times, rs, vs
 end 

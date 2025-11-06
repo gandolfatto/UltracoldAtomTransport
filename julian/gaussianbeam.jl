@@ -5,7 +5,9 @@
 ###
 
 
-### Create a Gaussian beam structure
+
+###   Create a Gaussian beam structure   ###
+#
 struct GaussianBeam
     r0::Float64                 # initial position of the Gaussian beam
     prop_dir::Float64           # propagation direction
@@ -13,9 +15,11 @@ struct GaussianBeam
     w0::Float64                 # beam width at r0
     P::Float64                  # beam power
 end
+###
 
 
 
+###
 function prop_matrix(z::Float64, 
                      lens_eles::Array{Float64})
     
@@ -52,9 +56,11 @@ function prop_matrix(z::Float64,
         return [1.0  z - lens_eles_z[end, 1]; 0.0  1.0] * M
     end
 end
+###
 
 
 
+###
 function q(z::Float64, 
            lens_eles::Array{Float64}, 
            beam::GaussianBeam)
@@ -71,9 +77,11 @@ function q(z::Float64,
     q_val = (A*q0 + B)/(C*q0 + D) 
     return q_val
 end 
+###
 
 
 
+###
 function beam_width(z::Float64, 
                     lens_eles::Array{Float64}, 
                     beam::GaussianBeam)
@@ -83,9 +91,11 @@ function beam_width(z::Float64,
     w = sqrt(beam.wavelength / (pi * imag(-1/q_val))) 
     return w
 end
+###
 
 
 
+###
 function beam_width_derivative(z::Float64, 
                                lens_eles::Array{Float64}, 
                                beam::GaussianBeam) 
@@ -97,9 +107,11 @@ function beam_width_derivative(z::Float64,
     w_prime = waist*(z/Zr)*(1/sqrt(1 + (z/Zr)^2))
     return w_prime 
 end 
+###
 
 
 
+###
 function I_field(x::Float64, y::Float64, z::Float64, 
                  lens_eles::Array{Float64}, 
                  beam::GaussianBeam)

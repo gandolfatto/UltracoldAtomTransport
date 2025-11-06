@@ -5,20 +5,23 @@
 ###
 
 
+
 ### 
-include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/gaussianbeam.jl")
-include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/rampprofiles.jl")
-include("C:/Users/gabri/OneDrive/Documents/UltracoldAtomTransport/julian/consts.jl")
+include("gaussianbeam.jl")
+include("rampprofiles.jl")
+include("consts.jl")
 ###
 
 
+
+###
 function atomic_pol(wavelength::Float64, 
                     transitions::Array{Float64})
 
     alpha = 0.0
     for transition in eachrow(transitions)
 
-        transition_wavelength, Gamma = transitions[1], transitions[2]
+        transition_wavelength, Gamma = transition[1], transition[2]
 
         omega = 2*pi*c/wavelength
         omega_i = 2*pi*c/transition_wavelength
@@ -29,9 +32,11 @@ function atomic_pol(wavelength::Float64,
     end 
     return alpha
 end 
+###
 
 
 
+###
 function I_lattice(x::Float64, y::Float64, z::Float64, t::Float64, 
                    lens_eles::Array{Float64}, 
                    beam1::GaussianBeam, beam2::GaussianBeam,
@@ -46,9 +51,11 @@ function I_lattice(x::Float64, y::Float64, z::Float64, t::Float64,
     I = I1 + I2 + 2*sqrt(I1*I2)*cos(2*k*(z - z_lattice))
     return I
 end 
+###
 
 
 
+###
 function U_lattice(x::Float64, y::Float64, z::Float64, t::Float64, 
                    lens_eles::Array{Float64}, 
                    beam1::GaussianBeam, beam2::GaussianBeam,
@@ -65,9 +72,11 @@ function U_lattice(x::Float64, y::Float64, z::Float64, t::Float64,
     U = (-real(alpha) / (2*e0*c)) * I
     return U
 end 
+###
 
 
 
+###
 function F_lattice(x::Float64, y::Float64, z::Float64, t::Float64, 
                    lens_eles::Array{Float64}, 
                    beam1::GaussianBeam, beam2::GaussianBeam,
@@ -102,3 +111,7 @@ function F_lattice(x::Float64, y::Float64, z::Float64, t::Float64,
 
     return Fx, Fy, Fz
 end 
+
+
+
+

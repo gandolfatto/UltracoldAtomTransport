@@ -5,15 +5,20 @@
 ###
 
 
-### Create a ramp profile structure
+
+###   Create a ramp profile structure   ###
+#
+###
 struct RampProfile
     ramp_type::String   # ramp type
     d_max::Float64      # max distance
     t_max::Float64      # max time 
 end
+###
 
 
 
+###
 function z_latt(t::Float64, 
                 rp::RampProfile)
 
@@ -35,8 +40,11 @@ function z_latt(t::Float64,
 
     return z_lattice
 end 
+###
 
 
+
+###
 function v_latt(t::Float64, 
                 rp::RampProfile)
     
@@ -58,8 +66,11 @@ function v_latt(t::Float64,
 
     return v_lattice
 end
+###
 
 
+
+###
 function a_latt(t::Float64,
                 rp::RampProfile)
     

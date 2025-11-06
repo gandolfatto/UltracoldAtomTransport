@@ -12,10 +12,13 @@ c = 2.997e8
 e0 = 8.85e-12
 amu = 1.67e-27
 
+
 # Time/Frequency
 ms = 1e-3
+us = 1e-6
 MHz = 1e6
 KHz = 1e3
+
 
 # Length
 cm = 1e-2
@@ -23,8 +26,10 @@ mm = 1e-3
 um = 1e-6
 nm = 1e-9
 
+
 # Temperature
 uK = 1e-6
+
 
 # Gravity
 g0 = -9.81         
