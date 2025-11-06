@@ -9,24 +9,18 @@ There are two versions of the main source code: (1) montepython (written in Pyth
 
 ## Usage
 Both montepython and kingjulian follow a similar workflow:
-  - Create an atomic species: mass of atom &amp; ground state --> excited state transitions
-    (the transitions are encoded in an array, which contains the transition wavelength and transition linewidth).
+  - Create an atomic species: mass of atom &amp; GS --> ES transitions.
   - Initialize the loading position &amp; velocity for the atoms.
   - Create the optical system
     (an array contaning the postion and focal length of each lens element).
   - Define a Gaussian beam object
     (each beam forming the optical lattice is specified by the following parameters: initial position, propagation direction, wavelength, initial beam width, beam power)
   - Define a ramp profile object for the optical lattice
-    (current ramp types: "None", "Linear", "Minimum Jerk").
+    (current ramp profiles: "None", "Linear", "Minimum Jerk").
   - Define simulation parameters (time step, simulation time, number of atoms, initial cloud position distribution, temperature).
   - Perform the simulation with run_MC_sim() --> returns the positions &amp; velocities of each atom at each time step of the simulation.
 
 ## Pending Updates
-### Major
-  - Focus-tunable lenses (i.e, implementing lenses with time-dependent focal length).
-  - New beam profiles (Higher-order TEM Gaussian beams, Bessel beams, etc.).
-  - New ramp profiles.
+  - Focus-tunable lenses (implementing thin lenses with time-dependent focal length).
+  - New beam profiles (Higher-order TEM Gaussian beams, Bessel beams, etc.) and new ramp profiles.
   - Simulated Landau-Zener tunneling due to suppressed trap depth in accelerated lattices.
-### Minor
-  - Simulated parametric heating due to intensity noise fluctuations along transverse axis.
-  - Simulated loss due to spontaneuous emission (less important in far-off resonant traps)
